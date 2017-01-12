@@ -4,6 +4,9 @@
 SOURCE_CONTAINER=
 DEST_CONTAINER=
 
+
+
+
 # function to cleanup when we're done
 function cleanup {
 	rm -rf $dir
