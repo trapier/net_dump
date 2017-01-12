@@ -44,6 +44,10 @@ cd $dir
 exec_cmd hostname hostname
 exec_cmd uname_-a uname -a
 exec_cmd uptime uptime
+exec_cmd docker.service systemctl cat docker.service
+test -e /etc/docker/daemon.json && \
+	exec_cmd daemon.json cat /etc/docker/daemon.json
+exec_cmd dockerd_commandline ps h -ww -o args -C dockerd
 
 # map out file locations for net namespaces
 declare -A netns
