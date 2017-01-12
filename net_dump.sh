@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # As seen in the NAMES column in `docker ps`
-SOURCE_CONTAINER=
-DEST_CONTAINER=
+SOURCE_CONTAINER=nginx1
+DEST_CONTAINER=nginx2
 
 
 
@@ -56,6 +56,8 @@ exec_cmd docker.service systemctl cat docker.service
 test -e /etc/docker/daemon.json && \
 	exec_cmd daemon.json cat /etc/docker/daemon.json
 exec_cmd dockerd_commandline ps h -ww -o args -C dockerd
+exec_cmd docker_version docker version
+exec_cmd docker_info docker info
 
 # map out file locations for net namespaces
 declare -A netns
