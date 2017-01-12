@@ -59,8 +59,12 @@ for nstype in "${!netns[@]}"; do
 	else
 		nsenter=""
 	fi
-	hash ifconfig &>/dev/null && \
-	exec_cmd ifconfig_-a        $nsenter ifconfig -a
+	if hash ifconfig &>/dev/null; then
+		exec_cmd ifconfig_-a        $nsenter ifconfig -a
+	elif [ $nstype = "container" ]; then
+		docker exec -it $local_container /bin/sh -c "test -e /sbin/ifconfig" && \
+		exec_cmd ifconfig_-a docker exec -it $local_container ifconfig -a
+        fi
 	exec_cmd ip_-d_-s_addr_sh   $nsenter ip -d -s addr sh
 	exec_cmd bridge_-s_fdb_sh   $nsenter bridge -s fdb show
 	exec_cmd ip_route_sh        $nsenter ip route sh
