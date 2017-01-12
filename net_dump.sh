@@ -91,7 +91,7 @@ cd $dir/test_results
 if [ $local_container = $SOURCE_CONTAINER ]; then
 	exec_cmd docker_exec_ping docker exec -it $local_container ping -c10 $DEST_CONTAINER
 else
-	exec_cmd docker_exec_ping echo test only run from source.  see source capture file.
+	exec_cmd docker_exec_ping echo test only run from host of specified source container.  see source capture file for results.
 fi
 
 # dump a copy of this script for the archive
