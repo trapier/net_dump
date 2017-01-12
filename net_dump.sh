@@ -4,13 +4,13 @@
 SOURCE_CONTAINER=
 DEST_CONTAINER=
 
+
+
+
 if [[ -z $SOURCE_CONTAINER || -z $DEST_CONTAINER ]]; then
 	echo Error: edit $0 and set SOURCE_CONTAINER and DEST_CONTAINER
 	exit 1
 fi
-
-
-
 
 # function to cleanup when we're done
 function cleanup {
