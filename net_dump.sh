@@ -45,7 +45,7 @@ test -z $local_container && echo Error: must be run from host running either $SO
 
 # populate a temporary directory structure to store information
 dir=$(mktemp -d -p /var/tmp)
-mkdir -p $dir/network_state/{host,overlay,container} $dir/docker_inspect $dir/test_results
+mkdir -p $dir/network_state/{host,overlay,container} $dir/docker_inspect $dir/test_results $dir/daemon
 
 initial_wd=$PWD
 cd $dir
@@ -54,12 +54,15 @@ cd $dir
 exec_cmd hostname hostname
 exec_cmd uname_-a uname -a
 exec_cmd uptime uptime
+
+# collect daemon info
+cd $dir/daemon
 exec_cmd docker.service systemctl cat docker.service
 test -e /etc/docker/daemon.json && \
 	exec_cmd daemon.json cat /etc/docker/daemon.json
-exec_cmd dockerd_commandline ps h -ww -o args -C dockerd
-exec_cmd docker_version docker version
-exec_cmd docker_info docker info
+exec_cmd commandline ps h -ww -o args -C dockerd
+exec_cmd version docker version
+exec_cmd info docker info
 
 # map out file locations for net namespaces
 declare -A netns
