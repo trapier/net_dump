@@ -63,6 +63,7 @@ test -e /etc/docker/daemon.json && \
 exec_cmd commandline ps h -ww -o args -C dockerd
 exec_cmd version docker version
 exec_cmd info docker info
+exec_cmd logs journalctl --no-pager --unit docker.service
 
 # map out file locations for net namespaces
 declare -A netns
