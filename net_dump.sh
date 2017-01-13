@@ -3,6 +3,8 @@
 # As seen in the NAMES column in `docker ps`
 SOURCE_CONTAINER=
 DEST_CONTAINER=
+# Name of the overlay network
+OVERLAY=
 
 
 
@@ -62,7 +64,7 @@ exec_cmd docker_info docker info
 # map out file locations for net namespaces
 declare -A netns
 netns[host]=/proc/$$/ns/net
-netns[overlay]=$(echo /var/run/docker/netns/*-$(docker network inspect -f '{{.Id}}' repro |cut -c1-9)*)
+netns[overlay]=$(echo /var/run/docker/netns/*-$(docker network inspect -f '{{.Id}}' $OVERLAY |cut -c1-9)*)
 netns[container]=$(docker inspect -f '{{.NetworkSettings.SandboxKey}}' $local_container)
 
 # collect host, overlay, and container networking info
