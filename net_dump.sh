@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # As seen in the NAMES column in `docker ps`
-SOURCE_CONTAINER=nginx1
-DEST_CONTAINER=nginx2
+SOURCE_CONTAINER=
+DEST_CONTAINER=
 
 
 
